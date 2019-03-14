@@ -1,0 +1,59 @@
+1)  A line of people at an amusement park ride.
+        The line is composed of members, represented as strings.
+        There is a front to the line, as well as a back.
+        When someone enters the line, place them at the end.
+        People may leave the line whenever they see fit, and those behind them take their place.
+
+    Given the above real-world information, use an array data structure to code the following solution.
+
+a) Use an array input: ["Vivian", "Ava", "Josh", "Patrick", "Mike"]
+b) Insert a new person, "Mary" at the end of the line. In other words, you should insert Mary after Mike.
+c) Find a person in line named "Josh." This function should return the position of 2 in the array, (recall that arrays are 0-based).
+d) Find a person in line named "Emily." What should your function return if it does not find the item in the array?
+e) What if Ava wants to allow a friend, "Melissa", to cut in line in front of her? How would you code this so Melissa appears before Ava?
+f) If Patrick wants to leave the line, how would you delete him from the array?
+
+//a
+let members = ["Vivian", "Ava", "Josh", "Patrick", "Mike"]
+
+//b
+function insertNewMembers(name) {
+members.push(name);
+return members;
+}
+
+console.log(insertNewMembers("Mary"));
+
+//c
+function findMemberPosition(name) {
+return members.indexOf(name);
+}
+console.log(findMemberPosition("Josh"));
+
+//d
+function searchMember(name) {
+if (members.includes(name) === true) {
+ return name;
+} else {
+ return `There is no active member ${name}.`
+}
+
+}
+console.log(searchMember("Emily"));
+
+//e
+let memberInsert = members.splice(1, 0, "Melissa");
+console.log(members);
+
+//f
+let memberRemove = members.splice(4, 1);
+console.log(members);
+
+
+2)  Provide another real-world example that you can model using a data structure.
+
+Another real-world example is how our internet browser works. If I am searching for "data structures" and I continue clicking one link after another while staying within the same tab, I can use the browser's back button to find a webpage from my browser history in the reverse searching order. I would use the pop and push (LIFO) methods to create the structure.
+
+3)  How would your data structure allow developers to access and manipulate the data?
+
+I read that using pop and push are common when trying to retrieve data involving stacks such as browser history. The structure appears to be set up using multiple methods. By allowing for multiple methods, the data structure is easier to debug, to maintain, and to add or remove unnecessary methods. 

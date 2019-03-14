@@ -1,0 +1,208 @@
+
+    1) In your own words, explain what clean code is and why it is important.
+
+    Clean coding is the coding that is easy-to-understand, easier to maintain, and easier to debug. Clean code has less comments because the classes, functions, and variables are named clearly so it is easier to understand the intention of the application.
+
+    _______________________________________________________________
+
+
+    2) Read this article about Toyota and their use of bad code. Although you may not yet understand all of the topics discussed, think about another commonly used object that relies on computers and explain what would happen if the code was not created to an acceptable standard.
+
+    I remember when this happened! Toyota lost their reputation. I purchased my car in March of 2014 and did not buy a Toyota because of their decision to go "rogue".
+    Another example is the use of ECG's to monitor heart rhythms. I found an article https://www.amjmed.com/article/S0002-9343(12)00076-9/pdf that actually showed computers aren't 100% accurate at interpreting results. The problems is within the variety of programs and doctors interpreting the results. Since up to 20% of patient reports are misinterpreted, patients are often being over or underseen.
+
+    _______________________________________________________________
+
+
+    3) Would you consider the following to be clean code? Explain why or why not. If not, refactor the code.
+
+    This code is not clean. I will need to change the naming conventions and add nesting. I did not spell Fahrenheit out completely because it is a word that is commonly misspelled.
+
+    BEGIN
+    CALL FUNCTION convertDegree with temp and degree
+      IF temp EQUALS degree(F) THEN
+        SET fahToCelsius to (fahTemp−32) * (5/9)
+          PRINT fahToCelsius
+
+    ELSE
+      SET celsiusToFah to celsiusTemp * 1.8000 + 32.00
+        PRINT celsiusToFah
+          END IF
+    END FUNCTION
+
+
+_______________________________________________________________
+
+    4) Would you consider the following to be clean code? Explain why or why not. If not, refactor the code.
+    I think this looks pretty clear. I understand it much better than code from #3. A percentage is being calculated by dividing the sum by the total and multiplying by 100. It's clear.
+
+    FUNCTION calcPercent(sum, total)
+     IF NOT(total = 0) THEN
+         SET percentage to sum / total * 100
+     ELSE
+       PRINT "Sorry, cannot divide by 0"
+     END IF
+
+     PRINT percentage
+    END FUNCTION
+
+    _______________________________________________________________
+
+
+    5) Using pseudocode, refactor the code for the following examples using the principles you have learned in this checkpoint.
+
+    a. The following function prints the subtotal of a customer's transaction and receives payment accordingly.
+
+    BEGIN
+      FUNCTION totalDue(subTotal, discountRate)
+      PRINT "Your total due is: " + subTotal * discountRate + (subTotal * tax)
+    END
+
+    FUNCTION receiveCustomerPayment(Total Due, paymentType)
+
+      IF paymentType = 'CASH' THEN
+        CALL getPayment RETURNING amount
+        PRINT "Change due: " + amount - totalDue()
+
+       ELSE IF paymentType = 'CREDIT CARD' THEN
+         CALL getPayment RETURNING amount
+        PRINT "Your credit card has been charged: " totalDue()
+       END IF
+    END FUNCTION
+    _______________________________________________________________
+
+
+    b. The following function checks out a book if there are no issues with the guest's account.
+
+    FUNCTION checkoutBook(book, guest)
+
+     IF guest.accountActive AND (guest.hasOverdueBooks) = 0 AND guest.outstandingFees = 0 THEN
+        APPEND book to guest.books
+          SET book.status to "Checked Out"
+               PRINT "Your books have been issued."
+     ELSE
+      PRINT "Unable to check out book."
+
+    END IF
+    END FUNCTION
+
+    _______________________________________________________________
+
+
+    c. The following class is a code snippet that should support the transactions a customer can perform at an ATM.
+
+    CLASS AtmCardHolderTransaction
+
+     FUNCTION displayBalance
+        PRINT balance
+     END FUNCTION
+
+     FUNCTION deposit(amount)
+        SET balance to balance + amount
+     END FUNCTION
+
+     FUNCTION withdraw(amount)
+         IF balance > amount THEN
+           SET balance to balance - amount
+         END
+     END FUNCTION
+
+     CLASS CreditOffers
+
+     FUNCTION creditCardOffer
+         IF NOT(customer.hasCreditCard) THEN
+             CALL offerCreditCard
+         END
+     END FUNCTION
+
+     CLASS BankingAccountOffers
+
+     FUNCTION checkStatus
+         IF NOT(customer.hasCheckingAccount) THEN
+             CALL offerCheckingAccount
+         END
+     END FUNCTION
+
+     ....
+     ....
+     ....
+
+    END
+    _______________________________________________________________
+
+
+Programming Questions
+
+You may do the following problems in any language of your choice. Use the clean code principles taught in this section while writing the code.
+
+6.
+BEGIN
+SET numbers with an array of given integers
+
+SET totalNumbers with numbers.reduce(function(sum, number)
+  PRINT sum equal to sum + number
+
+SET squareRootOf with Math.sqrt(totalNumbers)
+
+SET FUNCTION isPerfectSquare with no parameter
+  IF squareRootOf * squareRootOf === totalNumbers
+    LOG squareRootOf to console
+
+  ELSE
+    LOG totalNumbers to console
+END
+
+
+let numbers = [11, 15];
+
+let totalNumbers = numbers.reduce(function(sum, number) {
+  return sum += number;
+});
+
+console.log(totalNumbers);
+let squareRootOf = Math.sqrt(totalNumbers);
+
+console.log(squareRootOf)
+
+
+function isPerfectSquare() {
+  if (squareRootOf * squareRootOf === totalNumbers) {
+    console.log(squareRootOf);
+  } else {
+    console.log(totalNumbers);
+  }
+}
+
+isPerfectSquare();
+
+___________________________________________________
+7)
+
+BEGIN
+SET array of integers with numbers
+
+SET duplicateNumbers with [...new Set(numbers)]
+
+SET FUNCTION isDuplicate with no parameter
+  IF numbers are greater than duplicateNumbers
+    return true
+
+  ELSE
+    return false
+
+CALL FUNCTION with isDuplicate()
+END
+
+let numbers = [1, 3, 5, 2];
+
+let duplicateNumbers = [...new Set(numbers)];
+
+function isDuplicate() {
+  if (numbers > duplicateNumbers) {
+    return true;
+  } else {
+    return false;
+  }
+}
+
+isDuplicate();
