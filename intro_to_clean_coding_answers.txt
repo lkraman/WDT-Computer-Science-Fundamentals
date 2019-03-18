@@ -193,7 +193,7 @@ SET FUNCTION isDuplicate with no parameter
 CALL FUNCTION with isDuplicate()
 END
 
-let numbers = [1, 3, 5, 2];
+let numbers = [1, 3, 5, 2, 1];
 
 let duplicateNumbers = [...new Set(numbers)];
 
@@ -205,4 +205,4 @@ function isDuplicate() {
   }
 }
 
-isDuplicate();
+console.log(isDuplicate());
