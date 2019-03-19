@@ -1,0 +1,151 @@
+1)What is the main difference between a stack and a queue?
+
+The main difference between stacks and queues is the way in which the data enters and leaves. Stacks use a LIFO method. The data enters the base of the stack and leaves the top. Queues use a FIFO method. The first piece of data to enter the tail is the first piece of data to exit the head.
+
+
+2)What are the similarities between stacks and queues?
+
+Stacks and queues are similar because they can handle a limited amount of data. They both use similar methods to insert and remove data.
+
+3)Imagine you are an engineer tasked with implementing the UNDO and REDO options in a word processor such as Microsoft Word. Which data structure would you use for each option and why?
+
+I imagine the UNDO and REDO options are similar to the LIFO stacks. For each option, I would use .pop to undo and .push to redo. The reason for this is that I am wanting to return the last change the user made out of a series of multiple changes.
+
+Programming Questions
+
+1)Given a string, reverse it using a stack. For example, the string "Bloc!" should be converted to "!colB".
+
+/*
+BEGIN
+SET originalString to a string of your choice
+FUNCTION reverseString with originalString
+  set newString with empty string
+    ITERATE through originalString-1
+      DECREMENT by 1
+        newString equals newString + originalString[i]
+          return newString
+
+INVOKE reverseString
+END
+
+*/
+
+let originalString = "eiluJ si deman si god yM";
+function reverseString(originalString) {
+  let newString = "";
+
+  for (var i = originalString.length - 1; i >= 0; i--) {
+        newString += originalString[i];
+  }
+  return newString;
+}
+
+reverseString(originalString);
+
+2) Implement the pop method of a stack using one queue. Make a FIFO data structure mirror the functionality of a LIFO data structure. Since the internal list is not the same as defined in the checkpoint, it may help to rewrite the pseudocode first.
+
+// BEGIN
+// fUNCTION with Queue construcor function
+//   SET with empty array
+
+//   INIT Queue.prototype.add with function and pass in parameter record
+//     SET with this.data.unshift(record)
+
+//   INIT Queue.prototype.remove
+//     SET with this.data.pop()
+
+//   INIT Queue.prototype.first
+//     RETURN this.data[0]
+
+//   INIT Queue.prototype.last
+//     RETURN this.data[this.data.length - 1]
+
+//   INIT Queue.prototype.size
+//     RETURN this.data.length
+
+//   SET queue to new Queue()
+//   CALL queue.add()
+// END
+
+
+function Queue() {
+  this.data = [];
+}
+
+Queue.prototype.add = function(record) {
+  this.data.unshift(record);
+}
+Queue.prototype.remove = function() {
+  this.data.pop();
+}
+Queue.prototype.first = function() {
+  return this.data[0];
+}
+Queue.prototype.last = function() {
+  return this.data[this.data.length - 1];
+}
+Queue.prototype.size = function() {
+  return this.data.length;
+}
+
+const queue = new Queue()
+queue.add("A");
+queue.add("B");
+queue.add("C");
+queue.remove("A");
+console.log(queue);
+
+>>To delete an item, take all of the elements in the queue one at a time and put them at >>the end of the queue, except for the last one which should be removed and returned.
+
+1)Implement the enqueue and dequeue methods defined in the checkpoint inside your own Queue class.
+
+
+function Queue() {
+  let items = [];
+
+this.enqueue = function(element) {
+  items.push(element);
+};
+
+this.dequeue = function() {
+  return items.shift();
+};
+
+this.front = function() {
+  return items[0];
+};
+
+this.isEmpty = function() {
+  return items.length === 0;
+};
+
+this.size = function() {
+  return items.length;
+};
+
+this.print = function() {
+  console.log(items.toString());
+};
+}
+
+let queue = new Queue();
+
+queue.enqueue("Julie");
+queue.enqueue("Syl");
+queue.enqueue("Sal");
+
+queue.print();
+console.log(queue.size());
+queue.enqueue("Alice");
+queue.print();
+queue.dequeue();
+queue.print();
+console.log(queue.size());
+queue.dequeue();
+queue.print();
+queue.front();
+queue.print();
+queue.enqueue("Julie");
+queue.print();
+queue.enqueue("Syl");
+queue.print();
