@@ -52,16 +52,7 @@ reverseString(originalString);
 //     SET with this.data.unshift(record)
 
 //   INIT Queue.prototype.remove
-//     SET with this.data.pop()
-
-//   INIT Queue.prototype.first
-//     RETURN this.data[0]
-
-//   INIT Queue.prototype.last
-//     RETURN this.data[this.data.length - 1]
-
-//   INIT Queue.prototype.size
-//     RETURN this.data.length
+//     SET with this.data.shift()
 
 //   SET queue to new Queue()
 //   CALL queue.add()
@@ -76,24 +67,16 @@ Queue.prototype.add = function(record) {
   this.data.unshift(record);
 }
 Queue.prototype.remove = function() {
-  this.data.pop();
-}
-Queue.prototype.first = function() {
-  return this.data[0];
-}
-Queue.prototype.last = function() {
-  return this.data[this.data.length - 1];
-}
-Queue.prototype.size = function() {
-  return this.data.length;
+  this.data.shift();
 }
 
+
 const queue = new Queue()
-queue.add("A");
-queue.add("B");
-queue.add("C");
-queue.remove("A");
+queue.add("A, B, C");
+
+queue.remove();
 console.log(queue);
+______________________________________________________________________________________________________
 
 >>To delete an item, take all of the elements in the queue one at a time and put them at >>the end of the queue, except for the last one which should be removed and returned.
 

@@ -1,0 +1,226 @@
+Give written answers for each question and put them in linked-lists-answers.txt:
+
+1) What are some pros and cons of using linked lists instead of arrays?
+
+Pro:
+
+-Can handle multiple data types.
+-Can dynamically increase in size.
+-Data doesn't need to be shifted or moved when inserted or deleted.
+
+Con:
+
+-Can require more memory, but doesn't waste it.
+-No random access, which takes longer and slower.
+
+2) Come up with a real world example of a linked list.
+A real world example of a linked list is a conga line. The people in the line represent the nodes. The arms represent the pointers. Another example is a list of contact names in a cell phone. Names can be dynamically added to the list as long as there is a pointer attached to the name and the name is contained within a node.
+_______________________________________________________________________________
+Programming Questions:
+
+1) The linked list push function should take a value, create a node, and add it to the end of a list. Below is pseudocode for a push function for a singly linked list. However, there is something wrong with it. Submit both an explanation of the bug and a functional implementation of the method.
+
+/*FUNCTION push(element)
+CREATE node
+SET node.value TO element
+SET node.next TO null
+
+IF the head node does not exist
+ THEN SET head to node
+ELSE
+ SET current to head
+ SET current.next to node
+END IF
+END FUNCTION*/
+
+Explanation of pseudocode:
+
+In the pseudocode, the value(element) is to be placed in the push method. But, The push method should be located within the constructor function. And, the value should be placed when the node is created. The pseudocode called for an IF ELSE statement. I needed to use a WHILE statement.
+
+I created a Node constructor function and a LinkedList constructor function with a prototype. I also added the length property, although it was not requested.
+
+
+function Node(value) {
+  this.value = value;
+  this.next = null;
+  }
+
+function LinkedList() {
+  this.length = 0;
+  this.head = null;
+}
+
+LinkedList.prototype.push = function(value) {
+  let node = new Node(value)
+  if(!this.head) {
+    this.head = node;
+    this.length += 1;
+    return node;
+  }
+  let current = this.head;
+  while(current.next) {
+    current = current.next
+  }
+  current.next = node;
+  this.length += 1;
+  return node;
+}
+let singlyLinkedList = new LinkedList();
+singlyLinkedList.push(3);
+singlyLinkedList.push(10);
+console.log(singlyLinkedList);
+________________________________________________________________________
+
+2) Given an unsorted singly linked list, remove all duplicates from the linked list.
+Example
+Input: a -> c -> d -> d -> a
+Output: a -> c -> d
+
+function Node(value) {
+  this.value = value;
+  this.next = null;
+  }
+
+function RemoveDupLinkedList() {
+  this.length = 0;
+  this.head = null;
+}
+
+RemoveDupLinkedList.prototype = {
+insert:function(val) {
+  var item = {
+    value: val,
+    next: null
+    }
+  if (this.head === null) {
+      this.head = item;
+      return;
+  } else {
+      current = this.head;
+      while(current.next !== null) {
+      current = current.next;
+      }
+      current.next = item;
+  }
+},
+    showAllElements:function() {
+      if(!this.head) {
+      return;
+      var current = this.head, i = 1;
+      while(current.next != null){
+            console.log('The element at position ' + i + ' has value ' + current.value);
+            current = current.next;
+            i++;
+        }
+        // printing the last element
+        console.log('The element at position ' + i + ' has value ' + current.value);
+     }
+
+} ,
+function Setup(){
+        var list = new RemoveDupLinkedList();
+
+        // 3->5->9->5->4->5
+
+        var current = list.head, arr = [], prev,next;
+        // till the end item is not null
+        while(current.next != null){
+            if (arr.indexOf(current.value) == -1){
+                arr.push(current.value);
+            }else{
+                if (prev){
+                    prev.next = current.next;
+                }
+            }
+            prev = current;
+            current  = current.next;
+        }// end while
+
+        // test fo rthe last element in the linked list
+        if (current.next == null){
+            if (arr.indexOf(current.value) != -1){
+                prev.next = null;
+            }
+            }
+
+          // show all elements of linked list
+          list.showAllElements();
+      }
+
+}
+
+_____________________________________________________________________________
+3) Given an unsorted singly linked list, reverse it.
+Example
+Input: a -> b -> c -> d
+Output: d -> c -> b ->
+
+class Node {
+   constructor(value) {
+        this.value = value,
+        this.next = null;
+
+    }
+ }
+class SinglyLinkedList {
+  constructor() {
+    this.head = null;
+    this.tail = 0;
+    this.length = 0;
+  }
+
+  push (val) {
+    let newNode = new Node(val);
+    if(!this.head) {
+      this.head = newNode;
+      this.tail = newNode;
+    } else {
+      this.tail.next = newNode;
+      this.tail = newNode;
+    }
+      this.length++
+      return this;
+  }
+
+  reverse() {
+    if(!this.head) return false;
+    let node = this.head;
+    this.head = this.tail;
+    this.tail = node;
+
+    let prev = null;
+    let next;
+
+    for(let i = 0; i < this.length; i++) {
+      next      = node.next;
+      node.next = prev;
+      prev      = node;
+      node      = next;
+    }
+    return true;
+  }
+  print(){
+    let current = this.head;
+    let count = 0;
+    let arr = [];
+    while(count < this.length) {
+      arr.push(current.value);
+      current = current.next;
+      count++;
+    }
+    console.log(arr);
+  }
+};
+
+let list = new SinglyLinkedList();
+
+list.push(1);
+list.push(2);
+list.push(3);
+list.push(4);
+list.push(5);
+list.push(6);
+list.print();
+
+list.reverse();
+list.print();
