@@ -37,7 +37,6 @@ Explanation of pseudocode:
 
 In the pseudocode, the value(element) is to be placed in the push method. But, The push method should be located within the constructor function. And, the value should be placed when the node is created. The pseudocode called for an IF ELSE statement. I needed to use a WHILE statement.
 
-I created a Node constructor function and a LinkedList constructor function with a prototype. I also added the length property, although it was not requested.
 
 
 function Node(value) {
@@ -76,78 +75,108 @@ Example
 Input: a -> c -> d -> d -> a
 Output: a -> c -> d
 
-function Node(value) {
-  this.value = value;
-  this.next = null;
+class Node {
+  constructor(value) {
+    this.value = value;
+    this.next = null;
+
+  }
+}
+class LinkedList {
+  constructor() {
+    this.head = null;
+    this.size = 0;
   }
 
-function RemoveDupLinkedList() {
-  this.length = 0;
-  this.head = null;
+   push(value){
+
+    var node = new Node(value)
+    if(!this.head) {
+    this.head = node;
+    this.length += 1;
+    return node;
+  }
+  let current = this.head;
+  while(current.next) {
+    current = current.next
+  }
+  current.next = node;
+  this.length += 1;
+  return node;
 }
 
-RemoveDupLinkedList.prototype = {
-insert:function(val) {
-  var item = {
-    value: val,
-    next: null
+// remove(value){
+//     var current = this.head;
+//     var prev;
+//     if(current.value === value){
+//         current = current.next;
+//     } else {
+//         while(current.value !== value) {
+//             prev = current;
+//             current = current.next;
+//         }
+
+//         prev.next = current.next;
+//     }
+//   };
+
+deleteDup(){
+if (this.head === null || this.head.next === null) {
+        return;
     }
-  if (this.head === null) {
-      this.head = item;
-      return;
-  } else {
-      current = this.head;
-      while(current.next !== null) {
-      current = current.next;
-      }
-      current.next = item;
-  }
-},
-    showAllElements:function() {
-      if(!this.head) {
-      return;
-      var current = this.head, i = 1;
-      while(current.next != null){
-            console.log('The element at position ' + i + ' has value ' + current.value);
-            current = current.next;
-            i++;
+    var current = this.head;
+    while (current != null)
+    {
+        var prev = current;
+        var nextNode = current.next;
+        while (nextNode !== null)
+        {
+            if (current.value == nextNode.value)
+            {
+                prev.next = nextNode.next;
+                this.length --;
+            }
+            else
+            {
+                prev = nextNode;
+            }
+      nextNode = nextNode.next;
         }
-        // printing the last element
-        console.log('The element at position ' + i + ' has value ' + current.value);
-     }
+   current = current.next;
+    }
+return this;
+};
 
-} ,
-function Setup(){
-        var list = new RemoveDupLinkedList();
 
-        // 3->5->9->5->4->5
+   print(){
+    var current = this.head;
+    while(current) {
+      console.log(current.value);
+      current = current.next;
+    }
+  };
+ }
 
-        var current = list.head, arr = [], prev,next;
-        // till the end item is not null
-        while(current.next != null){
-            if (arr.indexOf(current.value) == -1){
-                arr.push(current.value);
-            }else{
-                if (prev){
-                    prev.next = current.next;
-                }
-            }
-            prev = current;
-            current  = current.next;
-        }// end while
 
-        // test fo rthe last element in the linked list
-        if (current.next == null){
-            if (arr.indexOf(current.value) != -1){
-                prev.next = null;
-            }
-            }
 
-          // show all elements of linked list
-          list.showAllElements();
-      }
+var myLL = new LinkedList();
 
-}
+myLL.push(1);
+myLL.push(1);
+myLL.push(2);
+myLL.push(2);
+myLL.push(3);
+myLL.push(4);
+myLL.push(5);
+myLL.push(6);
+myLL.push(7);
+myLL.push(8);
+myLL.push(8);
+myLL.push(9);
+myLL.push(10);
+myLL.deleteDup();
+myLL.print();
+
 
 _____________________________________________________________________________
 3) Given an unsorted singly linked list, reverse it.
