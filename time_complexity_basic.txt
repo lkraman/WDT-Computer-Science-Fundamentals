@@ -1,0 +1,71 @@
+1) What is time complexity and what is its relation to algorithms?
+Time complexity is the rate at which it takes to run a program. Time complexity is related to algorithms at which the input size increases the rate at which the function is executed.
+
+2) What is runtime?
+Runtime can mean the actual time, but can also mean time complexity.
+
+3) How is the runtime of an algorithm calculated?
+To calculate the runtime, add up all of the function's instructions, then eliminate any constants. For example, O(2n) is equivalent to O(n).
+
+4) Name the six types of algorithm growth rates we saw in this checkpoint and list them in order of most efficient to least efficient. Now Google another algorithmic growth rate not covered and place it in the correct spot in your list.
+
+Constant Growth Rate O(1) Best case
+Logarithmic Growth Rate O(log n)
+Linear Growth Rate O(n)
+Log-Linear Growth Rate O(n log n)
+Quadratic Growth Rate O(n^2)
+Exponential Growth Rate O(2^n)
+Factorial O(n!) Worst case
+
+
+5) Choose one of the algorithmic growth rates from the last question and make a comparison to a real-life situation.
+
+A queue is a real world example of a linear growth rate. It represents a long line of people waiting to enter a building. the longer the line, the longer the wait. However, the time complexity always remains O(n) for the worst case scenario.
+
+6) Determine the time complexity of the following snippet of code. It is commonly known as a linear search.
+
+FUNCTION linearSearch(array, target)
+ FOR each number in the array
+   IF number = target THEN
+     RETURN true
+   END IF
+ END FOR
+ RETURN false
+END FUNCTION
+Determine the time complexity of the following snippet of code.
+
+ANSWER= O(n)
+___________________________________
+
+If you get stuck, read through the graphical representation section again.
+
+FUNCTION foo(array)
+ FOR each number in the array
+   FOR each number in the array
+     print "Hello"
+   END FOR
+ END FOR
+END FUNCTION
+
+ANSWER= O(n^2)
+_________________________________________
+Determine the time complexity of the following snippet of code. It is commonly known as the Fibonacci sequence.
+
+FUNCTION fibonacci(number)
+ IF number < 1 THEN
+   ERROR
+ ELSE IF number = 1 or 2 THEN
+   RETURN 1
+ ELSE
+   CALL fibonacci WITH number - 2 RETURNING twoBack
+   CALL fibonacci WITH number - 1 RETURNING oneBack
+   RETURN twoBack + oneBack
+ END IF
+END FUNCTION
+
+ANSWER= O(2^n)
+______________________________________
+7) Out of the code snippets you just saw, which is the most time efficient?
+ANSWER= O(n)
+
+ANSWER= O(n)
