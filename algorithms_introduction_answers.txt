@@ -1,0 +1,81 @@
+1) Using proper pseudo-code, describe the following primitive algorithms:
+
+  Making coffee;
+  Washing dishes;
+  A choice of your own.
+
+  FUNCTION MakeCoffee:
+    SET coffee, coffeemaker, water, sugar, cup, cream;
+      Add (coffee value) coffee in coffee maker;
+      Add (water value) of water to coffee maker;
+      Start coffee maker;
+      WHILE (mug is not full)
+          fill mug;
+      END WHILE
+      IF (sugar is true)
+          THEN Add (value) of sugars;
+          ELSE don’t add (value) of sugars;
+      ENDIF
+      IF (cream is true)
+          THEN Add (value) of cream;
+          ELSE do not add (value) of cream;
+      ENDIF
+  END
+
+  FUNCTION WashDishes:
+    SET dirty dishes, water, soap, sponge dishrack;
+      Add (soap value) to sponge;
+      Add (water value) of water to sponge;
+      Start water;
+      RINSE dishes;
+      IF (dishes are dirty dishes )
+          LATHER dishes using sponge;
+          RINSE dishes
+      ELSE (dishes are not dirty dishes )
+         RETURN dishes to dish rack
+  END
+
+  FUNCTION WalkDog:
+  SET dog, leash, dog bags;
+      ATTACH leash to dog;
+        ATTACH dog bags to leash;
+      Start walk;
+        IF (dog poops = true)
+            USE dog bags to pick up poop;
+            DISPOSE upon return;
+        ELSE
+          do not use dog bags;
+      END walk;
+        REMOVE leash from dog;
+          REMOVE dog bags from leash;
+  END
+
+
+
+2) As with the knot algorithm, there may be more than one way to solve the problem. It is essential to try to pick the best algorithm for a situation. Name three companies who created an algorithm that made them successful, e.g., Google's search algorithm. It doesn't need to be a tech example (such as a recipe or manufacturing a product). Google's algorithm produces more relevant results than other search engines; what about each of your cases make them stand out?
+
+  Netflix: Netflix uses algorithms to predict what their users want to watch.
+
+  Match.com: Match uses an algorithm based on personality preferences and activity and browsing patterns of their members.
+
+  Facebook: Facebook has a powerful and infamous algorithm. Facebook is so powerful, digital marketing companies specialize in advertising solely on facebook.
+
+  Fun fact: When I owned a business, I was able to get 90-95% of my clients through facebook. By studying the patterns of my ideal clients, and their social behavior, I knew what to post, how often, and at what time. Of course, Facebook offered insight, as well. I even went to a Facebook seminar offered by FB. They featured a lot of "insider" information to capture the attention of your ideal client.
+
+3) Hypothesize about what constitutes an efficient algorithm versus an inefficient algorithm.
+
+  In terms of efficiency verses inefficiency, algorithms, in general,  can be compared by time, consistent data, money, and space.
+
+  Questions I would ask when considering an algorithm:
+
+  Out of all my possible solutions...
+
+  How much time will is take to solve the problem?
+  Do I sacrifice speed for efficiency?
+  How important is the data with regard to the solution?
+  Am I willing to compromise time to get the most accurate data?
+  Is there an existing algorithm for this type of problem?
+  What is my hypothesis and what is the minimal and maximal amount of data needed for a proper solution?
+  How accurate is my solution and are there better and faster alternatives?
+
+  The reason I would ask so many questions is that time and space cost money. CAP theorem also suggests that consistency will be sacrificed for availability, and vice versa. If an algorithm is being created for a global database, space and consistency are major concerns. The user of any solution will stop using a program that isn't consistent, crashes, and slow to load.
