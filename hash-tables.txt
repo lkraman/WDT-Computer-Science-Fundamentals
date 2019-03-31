@@ -1,0 +1,166 @@
+/*
+1)What is a hash table?
+
+A hash table is a data structure used to store large amounts of data in which the data can be retrieved by uniquely assigned keys.
+
+2)What is hashing?
+
+Hashing is used to convert string keys into numerical indices or, hash code, with the use of a hash function. Every key/value pair has a hash code.
+
+3)How does a hash table store data?
+
+Since hash codes are lengthy, modding is used to create a length that is less than the size of the array.
+
+4)How are hash tables and objects different?
+
+Hash tables are data structures meant to hold large amounts of similar data. The data is grouped together by type. For instance, customer information would be held separately from inventory. Objects hold smaller amounts of data and don't need to be similar in nature. For example, I could create an object containing my favorite TV shows this season and snack foods I eat while watching TV.
+
+5)Determine whether you would use a hash table or an object to store each of the following pieces of data:
+A list of pets and their unique names.
+-Hash Table
+The name, age, and the birthday of your best friend.
+-Object
+The name and location of every company in a given city.
+-Hash Table
+All of the books checked out from a library by a particular individual.
+-The information I receive from the librarian is probably coming from a hash table. But, if I created this example for one individual, I'd probably create an object. On the other hand, if the person is an avid reader, I might create a hash table. Do they read 10 books a month and they're 85 years old? I'd create a hash table for that circumstance.
+The primary and secondary phone numbers for a contact.
+-For one contact, I'd create an object.
+
+// */
+
+class CustomerData {
+  constructor(name, address, phoneNumber, size){
+    this.name = name;
+    this.address = address;
+    this.phoneNumber = phoneNumber;
+    this.keyMap = new Array(size);
+  }
+
+ hash(key, arrayLen) {
+  let total = 0;
+  let WEIRD_PRIME = 31;
+  for (let i = 0; i < Math.min(key.length, 100); i++) {
+    let char = key[i];
+    let value = char.charCodeAt(0) - 96
+    total = (total * WEIRD_PRIME + value) % arrayLen;
+  }
+  return total;
+}
+  set(key,value){
+    let index = this.hash(key);
+    if(!this.keyMap[index]){
+      this.keyMap[index] = [];
+    }
+    this.keyMap[index].push([key, value]);
+  }
+  get(key){
+    let index = this.hash(key);
+    if(this.keyMap[index]){
+      for(let i = 0; i < this.keyMap[index].length; i++){
+        if(this.keyMap[index][i][0] === key) {
+          return this.keyMap[index][i][1]
+        } else {
+         return this.keyMap[index][i][0];
+      }
+    }
+    return undefined;
+  }
+}
+}
+
+var data = new CustomerData();
+data.set("555-5555", "Frank", "1212 N Beans lane, Magical Fruit, Ga 22222")
+data.set("111-1111", "Julie", "1 Bark lane, Doggie City, De 19804")
+
+data.get("555-5555")
+data.get("111-1111")
+
+
+class StoreData {
+  constructor(size){
+    this.keyMap = new Array(size);
+  }
+
+ hash(key, arrayLen) {
+  let total = 0;
+  let WEIRD_PRIME = 31;
+  for (let i = 0; i < Math.min(key.length, 100); i++) {
+    let char = key[i];
+    let value = char.charCodeAt(0) - 96
+    total = (total * WEIRD_PRIME + value) % arrayLen;
+  }
+  return total;
+}
+
+set(inventory, quantity){
+    let index = this.hash(inventory);
+    if(!this.keyMap[index]){
+      this.keyMap[index] = [];
+    }
+    this.keyMap[index].push([inventory, quantity]);
+  }
+
+get(quantity){
+    let index = this.hash(quantity);
+    if(this.keyMap[index]){
+      for(let i = 0; i < this.keyMap[index].length; i++){
+        if(this.keyMap[index][i][0] === quantity) {
+          return this.keyMap[index][i][1]
+        }
+      }
+    }
+    return undefined;
+  }
+}
+let storeData = new StoreData();
+
+storeData.set("shirt", "25");
+storeData.get("shirt");
+
+class DigiNewspaper {
+  constructor(newspaper, publisher, publicationDate, size){
+    this.newspaper = newspaper;
+    this.publisher = publisher;
+    this.publicationDate = publicationDate;
+    this.keyMap = new Array(size);
+  }
+
+ hash(key, arrayLen) {
+  let total = 0;
+  let WEIRD_PRIME = 31;
+  for (let i = 0; i < Math.min(key.length, 100); i++) {
+    let char = key[i];
+    let value = char.charCodeAt(0) - 96
+    total = (total * WEIRD_PRIME + value) % arrayLen;
+  }
+  return total;
+}
+  set(key,value){
+    let index = this.hash(key);
+    if(!this.keyMap[index]){
+      this.keyMap[index] = [];
+    }
+    this.keyMap[index].push([key, value]);
+  }
+  get(key){
+    let index = this.hash(key);
+    if(this.keyMap[index]){
+      for(let i = 0; i < this.keyMap[index].length; i++){
+        if(this.keyMap[index][i][0] === key) {
+          return this.keyMap[index][i][1]
+        } else {
+          return this.keyMap[index][i][0];
+        }
+      }
+    }
+   return;
+  }
+}
+
+var diginewspaper = new DigiNewspaper();
+diginewspaper.set("Pub A", "April 12 2010")
+diginewspaper.set("Pub B", "April 1 2009")
+
+// diginewspaper.get("Pub A")
+diginewspaper.get("Pub A");
