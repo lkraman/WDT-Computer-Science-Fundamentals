@@ -1,0 +1,61 @@
+1) What is a real-life scenario that uses linear search?
+
+Let's say you have a line of 10 people waiting to pay for a purchase. Then, the credit card machine breaks. To filter out the cash-only customers, the manager starts at the front of the line and asks each person, "Are you paying with cash or credit?"
+
+2) What is a real-life scenario that uses binary search?
+
+You are at a library. You do know have a particular book or author in mind, but you do enjoy reading self-help books. You know self-helps books are usually filed in the "psychology" section. You walk along the huge aisles of books. Each end is labeled alphabetically. You start at "A" in the fiction section. You immediately know you must start in the non-fiction section so you walk to that side of the library.
+You start walking towards "M" because, although you cannot remember if "psychology" starts with an "S" or "P", you do know that both of those letters are greater than "M". You walk over to the aisle labeled with a "T". You know "S" and "P" are less than "T". You continue this method until you figure out that psychology is spelled with a "P" and you find a self-help book, "How to Spell Psychology".
+
+3) Given the alphabetically sorted collection in this checkpoint, how many iterations would it take to find the value G using linear search?
+
+7 iterations
+
+4) Given the alphabetically sorted collection in this checkpoint, how many iterations would it take to find the value G using binary search?
+
+3 iterations
+
+5) Given an unsorted collection of a million items, which algorithm would you choose between linear search and binary search? Explain your reasoning.
+
+If sorting is not an option, then I would have to choose a linear search. Binary searches only work on sorted values.
+
+6) Given a sorted collection of a million items, which algorithm would you choose between linear search and binary search? Explain your reasoning.
+
+Due to the size of the collection, I would choose a binary search. A linear search would take too long.
+
+__________________________________________________________________
+Programming Assignment:
+
+1) You and a friend have set a wager to see who can find the word "Albatross" in the dictionary the fastest. Write a program to allow you to win the bet.
+
+function wordSearch(arr, word){
+    for(var i = 0; i < arr.length; i++){
+        if(arr[i] === word) return i;
+    }
+    return -1;
+}
+wordSearch(["question", "peanut", "query", "albatross", "psychic"], "albatross");
+
+
+
+ 2) You work at a pet store, and a child has asked you to net the only white-spotted goldfish from the fish tank. Write a program that will help you net the right fish.
+
+function findGoldfish(arr, fish) {
+    var start = 0;
+    var end = arr.length - 1;
+    var middle = Math.floor((start + end) / 2);
+    while(arr[middle] !== fish && start <= end) {
+        if(fish < arr[middle]){
+            end = middle - 1;
+        } else {
+            start = middle + 1;
+        }
+        middle = Math.floor((start + end) / 2);
+    }
+    if(arr[middle] === fish){
+        return middle;
+    }
+    return -1;
+}
+
+findGoldfish(["Betta", "Bristlenose Pleco",  "Cory Catfish",  "Guppies", "Mollies", "Tetra", "White-spotted goldfish"], "White-spotted goldfish");
