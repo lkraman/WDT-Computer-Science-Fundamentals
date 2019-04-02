@@ -1,0 +1,89 @@
+1) Define and compare recursion and iteration.
+
+Recursion: the technique where a functions calls itself with use of parameters incrementing by one until a base case has been met.
+
+Unlike iteration, recursion must apply these three rules:
+  1. have a base case.
+  2. move toward the base case.
+  3. call itself within the function
+____________
+Iteration: the technique of using the loop process.
+
+Unlike recursion, iteration uses a typical format like below:
+ 1. initialization
+ 2. condition
+ 3. increment or decrement the control variable
+___________
+Recursion vs. Iteration
+
+ Recursion tends to be slower
+ Recursion may have more limitations than iteration
+ Recursion may be easier to implement
+ Iterative functions can be cleaner
+ Iterative solutions can be more complex
+_________________________________________________________________________________________________________________________
+2) Name five algorithms that are commonly implemented by recursion.
+
+Five algorithms that use recursion are fibonacci sequence, factorial, merge sort, quick sort, binary tree.
+_________________________________________________________________________________________________________________________
+3) When should you use recursion, and when should you avoid recursion? Give examples for each.
+
+Recursive functions are best used when you need a combination of sub-results with known cases. An example of this is factorials.
+
+A classic example of when recursive functions should be when we lose performance by trying to write cleaner or more straightforward code. Maximal and minimal is an example that should be written using iteration.
+_________________________________________________________________________________________________________________________
+4) Compare the recursive and iterative solutions to the three algorithms from the checkpoint (factorial, maximum, and fibonacci). What is similar, and what is different?
+
+Similarities:
+
+Factorial:
+  Recursive has a base case that ends the function. The iterative solution keeps a "results" variable to return at the end of the function.
+Maximum:
+  Recursive has a base case that compares the number to the base case to find the maximum. The iterative solution keeps a results variable to return at the end of the function continues to update the maximum result using a loop.
+Fibonacci:
+  Recursive has a base case that ends the function and a recursive case number. The iterative solution keeps a "current" variable to return at the end of the function.
+
+Differences:
+  Recursive:
+  may run slower
+  system limitations
+  can be easier to implement
+
+Iterative:
+  can be more complex
+  can be better performing
+_________________________________________________________________________________________________________________________
+5) Given a multi-dimensional collection (such as an array) where the number of dimensions is unknown, write a recursive algorithm to count the number of items in the entire collection.
+
+function countColors(array) {
+let count = 0;
+
+    for(let i=0; i<array.length; i++){
+      if(typeof array[i] === "object"){
+    count += countColors(array[i]);
+      } else {
+        count++;
+      }
+    } return count;
+  };
+
+
+countColors(["magenta", "sage", "orange", "green", ["red", "blue", "yellow"], "black", "white"]);
+_________________________________________________________________________________________________________________________
+6) A palindrome is a word or phrase whose spelling is the same either direction (e.g., racecar). Write a recursive algorithm to determine if a given word or phrase is a palindrome.
+
+  function isPalindrome(str){
+   if (str.length === 0){
+     return true;
+  }
+   if (str[0] !== str[str.length-1]){
+     return false;
+   }
+  return isPalindrome(str.slice(1,str.length-1));
+};
+
+isPalindrome(‘racecar’);
+_________________________________________________________________________________________________________________________
+7) Google Easter Egg: Google the term "recursion". Google will prompt you with "Did you mean: recursion". Explain why this behavior exhibits properties of recursion.
+
+It is meant to be a clever way of demonstrating recursion. As we query "recursion", Google calls for the same query. If we select the link, the cycle repeats itself.
