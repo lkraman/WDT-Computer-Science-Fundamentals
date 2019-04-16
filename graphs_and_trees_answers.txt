@@ -1,0 +1,204 @@
+
+// 1)What is a binary tree and what makes it unique to other trees?
+
+// A binary tree is a search method in which each node has two child nodes. The children are left and right nodes. What makes them unique is they are placed in the order they enter the value structure.
+
+// 2)What is a heuristic?
+// A heuristic technique is used to offer a pragmatic and faster solution to solving a problem with risk of inaccuracy.
+
+// 3)What is another problem besides the shortest-path problem that requires the use of heuristics?
+
+// We can become overwhelmed by decisions and tasks. If we use heuristics by focusing on the end goal, we are able to set smaller tasks and benchmarks by making decisions about what needs to be done in order to achieve the ultimate goal.
+
+// 4)What is the difference between a depth-first search and a breadth-first search?
+
+// DFS is the process of moving down a branch of nodes searching for specific value. If the value is not found, the search begins again at the parent node and searches down another branch until the value is found. This value structure searches deep and uses stacks.
+// BFS is the process of moving towards the right direction of branch searching for specific value. If the value is not found, the search begins again at the parent node and the process of searching moves in the direction of left. This value structure searches wide and uses queues.
+
+// 5)Explain in your own words what an directed, a-cyclic, unweighted graph is.
+
+// A directed, a-cyclic, unweighted graph is one that moves in one direction (ie north to south), doesn't loop, and it is difficult to find an accurate solution for the distance between nodes.
+
+// 6) What kind of graph is a binary search tree?
+
+// A binary search tree is a directed, unweighted, a-cyclic graph.
+
+
+
+// Programming Questions:
+// 1)Given a Binary Search Tree and a value, write a function that checks to see whether the value exists within the tree.
+
+// Example: The value 10 exists in the tree. The value 23 does not exist in the tree.
+
+// Example: The distance between the nodes 4 and 10 is 4. The distance between the nodes 8 and 10 is 1. The distance between the nodes 1 and 14 is 4.
+
+// // CLASS Node
+// //   constructor(value)
+// //     SET value to value
+// //     SET left to null
+// //     SET right to null
+// // END CLASS
+
+// // CLASS BinaryTree
+// //   constructor()
+// //     SET root to null
+
+// // Start at root
+// //   IF this equals null RETURN null
+// //   ELSE IF this key equals search value RETURN this
+// //   ELSE IF this key is less than search value
+// //       search right
+// //   ELSE
+// //       search left
+
+// // END FUNCTION
+
+
+
+
+class Node {
+    constructor(value){
+        this.value = value;
+        this.left = null;
+        this.right = null;
+    }
+}
+
+class BST{
+    constructor(){
+        this.root = null;
+}
+
+
+          /// started refactoring code here
+ insert(value) {
+		var newNode = new Node(value);
+		if (this.root === null) {
+			this.root = newNode;
+			this.length++;
+		} else {
+			this.insertNode(this.root, newNode);
+		}
+	}
+insertNode(node, newNode) {
+		if (newNode.value < node.value) {
+			if (node.left === null) {
+				node.left = newNode;
+				this.length++;
+			} else {
+				this.insertNode(node.left, newNode);
+			}
+		} else {
+			if (node.right === null) {
+				node.right = newNode;
+				this.length++;
+			} else {
+				this.insertNode(node.right, newNode);
+			}
+		}
+	}
+
+
+
+//ended here
+
+
+find (value) {
+    let current = this.root;
+    while (current) {
+      if (value === current.value) {
+        return true;
+      }
+      if (value < current.value) {
+        current = current.left;
+      } else {
+        current = current.right;
+      }
+    }
+    return false;
+}
+
+  lca(n1, n2) {
+    let currentNode = this.root;
+    while(currentNode){
+      if(n1 < currentNode.value && n2 < currentNode.value){
+        currentNode = currentNode.left;
+      } else if (n1 > currentNode.value && n2 > currentNode.value) {
+        currentNode = currentNode.right;
+      } else {
+        return currentNode;
+      }
+    }
+  }
+
+
+distance(n1, n2){
+var counter = 0;
+
+var currentNode = this.root;
+
+if (currentNode === null) return null;
+
+  while (currentNode){
+    counter++;
+  if (currentNode.value === n1){
+    break;
+  }
+  else if (n1 > currentNode.value){
+  currentNode = currentNode.right;
+  }
+
+  else{
+currentNode = currentNode.left;
+    }
+
+}
+
+var currentNode =this.root.value;
+   while (currentNode){
+    counter++;
+  if (currentNode.value === n2){
+    break;
+    }
+
+    else if (n2 > currentNode.value){
+  currentNode = currentNode.right;
+    }
+
+    else {
+ currentNode = currentNode.left;
+      }
+    }
+    return counter;
+    }
+    }
+
+
+//      8
+//     / \
+//    3  10
+//   / \   \
+//  1   6  14
+//     / \ /
+//    4  7 13
+let bst = new BST(8);
+bst.insert(8);
+bst.insert(3);
+bst.insert(10);
+bst.insert(1);
+bst.insert(6);
+bst.insert(14);
+bst.insert(7);
+bst.insert(4);
+bst.insert(13);
+
+
+console.log(bst.find(9));
+console.log(bst.find(100));
+console.log(bst.find(4));
+console.log(bst.find(13));
+
+console.log(bst.lca(4, 14));
+// console.log(bst.distance(1, 13))
+console.log(bst.distance(6, 14))
+console.log(bst.distance(4, 14))
