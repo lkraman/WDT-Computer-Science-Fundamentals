@@ -8,7 +8,8 @@
 
 // 3)What is another problem besides the shortest-path problem that requires the use of heuristics?
 
-// We can become overwhelmed by decisions and tasks. If we use heuristics by focusing on the end goal, we are able to set smaller tasks and benchmarks by making decisions about what needs to be done in order to achieve the ultimate goal.
+// Heuristic rules are often used when implementing anti-virus software. Algorithms can be used to determine current and predict future viruses. But, it is never 100% accurate.
+Another problem using heuristics is when I code everyday. I always have to implement some form of heuristics. Most of the time I'm trying to figure out why code works and how to get me code to works. On very rare occasions, I'm celebrating when I get it correct the first time.
 
 // 4)What is the difference between a depth-first search and a breadth-first search?
 
@@ -54,7 +55,7 @@
 // // END FUNCTION
 
 
-
+++++++++++++++++++ MY SOLUTION+++++++++++++++++++++++++++++++++++++++++++
 
 class Node {
     constructor(value){
@@ -202,3 +203,131 @@ console.log(bst.lca(4, 14));
 // console.log(bst.distance(1, 13))
 console.log(bst.distance(6, 14))
 console.log(bst.distance(4, 14))
+
+++++++++++++++++++++++++++++++++++++++++Correct Solution+++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+function Node(value){
+  this.value = value;
+  this.left = null;
+  this.right = null;
+}
+function BinarySearchTree() {
+  this.root = null;
+}
+
+BinarySearchTree.prototype.push = function (val) {
+
+  if(this.root === null) {
+    this.root = new Node(val);
+  }
+  else {
+    var currentNode = this.root;
+    while (currentNode != null) {
+      if (val < currentNode.value) {
+        if (currentNode.left == null) {
+          currentNode.left = new Node(val);
+          break;
+        } else {
+          currentNode = currentNode.left;
+        }
+      } else {
+        if (currentNode.right == null) {
+          currentNode.right = new Node(val);
+          break;
+        } else {
+          currentNode = currentNode.right;
+        }
+      }
+    }
+
+  }
+}
+
+
+function distanceFromNode (node, value) {
+  if(node == null) {
+
+    return undefined;
+  }
+  if(node.value == value) {
+    return 0;
+  } else {
+    if(value < node.value) {
+      return 1+distanceFromNode(node.left,value);
+    } else if(value > node.value){
+      return 1+distanceFromNode(node.right,value);
+    }
+  }
+}
+
+function findLowestCommonAncestor (node, value1, value2) {
+  if(node == null) {
+    return null;
+  }
+  if(node.value > value1 && node.value > value2) {
+    return findLowestCommonAncestor(node.left, value1, value2);
+  }
+  if(node.value < value1 && node.value < value2) {
+    return findLowestCommonAncestor(node.right, value1, value2);
+  }
+  return node;
+}
+
+function distanceBetweenTwoNodes(root, value1, value2) {
+  var common = findLowestCommonAncestor(root, value1, value2);
+
+  if(common == null || common == undefined) {
+    return -1;
+  }
+  if( distanceFromNode(common,value1) == -1 ) {
+    return -1;
+  }
+  if( distanceFromNode(common,value2) == -1 ) {
+    return -1;
+  }
+  return distanceFromNode(common,value1) + distanceFromNode(common,value2);
+
+}
+
+function distanceBetweenTwoNodes(root, value1, value2) {
+  var common = findLowestCommonAncestor(root, value1, value2);
+
+  if(common == null || common == undefined) {
+    return -1;
+  }
+  if( distanceFromNode(common,value1) == -1 ) {
+    return -1;
+  }
+  if( distanceFromNode(common,value2) == -1 ) {
+    return -1;
+  }
+  return distanceFromNode(common,value1) + distanceFromNode(common,value2);
+
+}
+
+
+/*
+  Test your code through here(main func)
+*/
+function testCode() {
+  var test = [8,3,1,6,4,7,10,14,13];
+  // //      8
+// //     / \
+// //    3  10
+// //   / \   \
+// //  1   6  14
+// //     / \ /
+// //    4  7 13
+
+
+  var binaryTree = new BinarySearchTree();
+  var root = new Node(test[0]);
+  binaryTree.root = root;
+
+  for(var i = 1; i < test.length; i++) {
+    binaryTree.push(test[i]);
+  }
+
+  console.log(distanceBetweenTwoNodes(binaryTree.root,3,13));
+}
+
+testCode();
