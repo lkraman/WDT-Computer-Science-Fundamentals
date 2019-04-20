@@ -29,138 +29,188 @@ The primary and secondary phone numbers for a contact.
 
 // */
 
-class CustomerData {
-  constructor(name, address, phoneNumber, size){
-    this.name = name;
-    this.address = address;
-    this.phoneNumber = phoneNumber;
-    this.keyMap = new Array(size);
-  }
 
- hash(key, arrayLen) {
-  let total = 0;
-  let WEIRD_PRIME = 31;
-  for (let i = 0; i < Math.min(key.length, 100); i++) {
-    let char = key[i];
-    let value = char.charCodeAt(0) - 96
-    total = (total * WEIRD_PRIME + value) % arrayLen;
+
+var hash = (key, storage) => {
+  var hashCode = 0;
+  for (var i = 0; i < key.length; i++) {
+    hashCode += key.charCodeAt(i);
   }
-  return total;
-}
-  set(key,value){
-    let index = this.hash(key);
-    if(!this.keyMap[index]){
-      this.keyMap[index] = [];
-    }
-    this.keyMap[index].push([key, value]);
-  }
-  get(key){
-    let index = this.hash(key);
-    if(this.keyMap[index]){
-      for(let i = 0; i < this.keyMap[index].length; i++){
-        if(this.keyMap[index][i][0] === key) {
-          return this.keyMap[index][i][1]
-        } else {
-         return this.keyMap[index][i][0];
+  return hashCode % storage;
+};
+
+let HashTable = function (){
+
+  let storage = [];
+  let storageLimit = 31;
+
+  this.set = function(customer){
+
+    let key = (customer.number)
+    let index = hash(key, storageLimit);
+    if(storage[index] === undefined){
+      storage[index] = customer;
+    } else {
+      while(storage[index] !== undefined){
+        index++;
       }
+      storage[index] = customer;
     }
-    return undefined;
+  };
+
+  this.get = function(customerObj){
+    let index = hash(customerObj, storageLimit);
+    return storage[index];
+  };
+
+};
+
+let ht = new HashTable();
+
+var Customer1 = {
+  name: 'Julie',
+  address: '1 Bark lane, Doggie City, De 19808',
+  number: '111-1111'
+};
+var Customer2 = {
+  name: 'Frank',
+  address: '1212 N Beans lane, Magical Fruit, Ga 22222',
+  number: '555-5555'
+};
+
+
+ht.set(Customer1);
+ht.set(Customer2);
+
+
+
+ht.set(Customer2);
+ht.set(Customer1);
+console.log(ht.get('555-5555'));
+console.log(ht.get('111-1111'));
+
+
+_________________________________________________________________________________________
+
+
+var hash = (key, storage) => {
+  var hashCode = 0;
+  for (var i = 0; i < key.length; i++) {
+    hashCode += key.charCodeAt(i);
   }
-}
-}
+  return hashCode % storage;
+};
 
-var data = new CustomerData();
-data.set("555-5555", "Frank", "1212 N Beans lane, Magical Fruit, Ga 22222")
-data.set("111-1111", "Julie", "1 Bark lane, Doggie City, De 19804")
+let HashTable = function (){
 
-data.get("555-5555")
-data.get("111-1111")
+  let storage = [];
+  let storageLimit = 31;
 
+  this.set = function(inventory){
 
-class StoreData {
-  constructor(size){
-    this.keyMap = new Array(size);
-  }
-
- hash(key, arrayLen) {
-  let total = 0;
-  let WEIRD_PRIME = 31;
-  for (let i = 0; i < Math.min(key.length, 100); i++) {
-    let char = key[i];
-    let value = char.charCodeAt(0) - 96
-    total = (total * WEIRD_PRIME + value) % arrayLen;
-  }
-  return total;
-}
-
-set(inventory, quantity){
-    let index = this.hash(inventory);
-    if(!this.keyMap[index]){
-      this.keyMap[index] = [];
-    }
-    this.keyMap[index].push([inventory, quantity]);
-  }
-
-get(quantity){
-    let index = this.hash(quantity);
-    if(this.keyMap[index]){
-      for(let i = 0; i < this.keyMap[index].length; i++){
-        if(this.keyMap[index][i][0] === quantity) {
-          return this.keyMap[index][i][1]
-        }
+    let key = (inventory.item)
+    let index = hash(key, storageLimit);
+    if(storage[index] === undefined){
+      storage[index] = inventory;
+    } else {
+      while(storage[index] !== undefined){
+        index++;
       }
+      storage[index] = inventory;
     }
-    return undefined;
-  }
-}
-let storeData = new StoreData();
+  };
 
-storeData.set("shirt", "25");
-storeData.get("shirt");
+  this.get = function(inventoryObj){
+    let index = hash(inventoryObj, storageLimit);
+    return storage[index];
+  };
 
-class DigiNewspaper {
-  constructor(newspaper, publisher, publicationDate, size){
-    this.newspaper = newspaper;
-    this.publisher = publisher;
-    this.publicationDate = publicationDate;
-    this.keyMap = new Array(size);
-  }
+};
 
- hash(key, arrayLen) {
-  let total = 0;
-  let WEIRD_PRIME = 31;
-  for (let i = 0; i < Math.min(key.length, 100); i++) {
-    let char = key[i];
-    let value = char.charCodeAt(0) - 96
-    total = (total * WEIRD_PRIME + value) % arrayLen;
+let ht = new HashTable();
+
+var InventoryShirts = {
+  item: 'T-shirt',
+  quantity: '10'
+};
+var InventoryPants = {
+ item: 'Jeans',
+  quantity: '8'
+};
+
+
+ht.set(InventoryShirts);
+ht.set(InventoryPants);
+
+
+
+ht.set(InventoryShirts);
+ht.set(InventoryPants);
+console.log(ht.get('10'));
+console.log(ht.get('Jeans'));
+
+
+_____________________________________________________________________________________________________
+
+
+
+
+
+var hash = (key, storage) => {
+  var hashCode = 0;
+  for (var i = 0; i < key.length; i++) {
+    hashCode += key.charCodeAt(i);
   }
-  return total;
-}
-  set(key,value){
-    let index = this.hash(key);
-    if(!this.keyMap[index]){
-      this.keyMap[index] = [];
-    }
-    this.keyMap[index].push([key, value]);
-  }
-  get(key){
-    let index = this.hash(key);
-    if(this.keyMap[index]){
-      for(let i = 0; i < this.keyMap[index].length; i++){
-        if(this.keyMap[index][i][0] === key) {
-          return this.keyMap[index][i][1]
-        } else {
-          return this.keyMap[index][i][0];
-        }
+  return hashCode % storage;
+};
+
+
+let HashTable = function (){
+
+  let storage = [];
+  let storageLimit = 31;
+
+
+  this.set = function(newspaper){
+
+    let key = (newspaper.publisher + ', ' + newspaper.date)
+    let index = hash(key, storageLimit);
+    if(storage[index] === undefined){
+      storage[index] = newspaper;
+    } else {
+      while(storage[index] !== undefined){
+        index++;
       }
+      storage[index] = newspaper;
     }
-   return;
-  }
-}
+  };
 
-var diginewspaper = new DigiNewspaper();
-diginewspaper.set("Pub A", "April 12 2010")
-diginewspaper.set("Pub B", "April 1 2009")
+  this.get = function(newspaperObj){
+    let index = hash(newspaperObj, storageLimit);
+    return storage[index];
+  };
 
-// diginewspaper.get("Pub A")
-diginewspaper.get("Pub A");
+};
+
+
+let ht = new HashTable();
+
+var NewsPaperA = {
+  publisher: 'We Publish',
+  date: '01-30-2008',
+  paper: 'Lorem ipsum dolor sit ametm.'
+};
+var NewsPaperB = {
+  publisher: 'We Publish too',
+  date: '02-03-2008',
+  paper: 'Lorem ipsum dolor sit amet.'
+};
+
+
+ht.set(NewsPaperA);
+ht.set(NewsPaperB);
+
+
+
+console.log(ht.get('We Publish, 01-30-2008'));
+console.log(ht.get('We Publish too, 02-03-2008'));
